@@ -2,11 +2,11 @@
 
 Get-Mailbox -Server "<servername>" -resultsize "Unlimited" | Get-MailboxPermission | where { ($_.AccessRights -eq "FullAccess") -and ($_.IsInherited -eq $false) -and -not ($_.User -like "NT AUTHORITY\SELF") } | ft Identity, User –AutoSize
 
-Get-Mailbox -resultsize unlimited | Get-MailboxPermission | where {($_.user.tostring() -ne "NT AUTHORITY\SELF") -and $_.Deny -eq $false}  | Select {$_.AccessRights},Deny,InheritanceType,User,Identity,IsInherited  | Export-Csv -Path ###mailboxpermissions.csv### -NoTypeInformation
 
 
 
-Get-MessageTrackingLog | more
+
+
 
 
 
@@ -23,3 +23,31 @@ $emailPoints = @(
     @{Point = "EMAIL.10"; Description = "Restringir receção de mails com domínios locais"}
     @{Point = "EMAIL.11"; Description = "Implementação de DNSSEC"}
 )
+
+
+
+}
+
+
+function Email-1{
+    Write-Host "Point: $($emailPoints[0].Point), Description: $($emailPoints[0].Description)"
+    Get-Mailbox -resultsize unlimited | Get-MailboxPermission | where {($_.user.tostring() -ne "NT AUTHORITY\SELF") -and $_.Deny -eq $false}  | Select {$_.AccessRights},Deny,InheritanceType,User,Identity,IsInherited  | Export-Csv -Path ###mailboxpermissions.csv### -NoTypeInformation
+
+}
+
+
+
+
+
+function Email-7{
+    Write-Host "Point: $($emailPoints[6].Point), Description: $($emailPoints[6].Description)"
+    Get-ThrottlingPolicy | Format-List
+}
+
+
+function Email-9{
+    Write-Host "Point: $($emailPoints[8].Point), Description: $($emailPoints[8].Description)"
+    Get-MessageTrackingLog | more
+}
+
+
