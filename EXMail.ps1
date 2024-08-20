@@ -1,13 +1,5 @@
 
 
-Get-Mailbox -Server "<servername>" -resultsize "Unlimited" | Get-MailboxPermission | where { ($_.AccessRights -eq "FullAccess") -and ($_.IsInherited -eq $false) -and -not ($_.User -like "NT AUTHORITY\SELF") } | ft Identity, User –AutoSize
-
-
-
-
-
-
-
 
 
 $emailPoints = @(
@@ -24,9 +16,6 @@ $emailPoints = @(
     @{Point = "EMAIL.11"; Description = "Implementação de DNSSEC"}
 )
 
-
-
-}
 
 
 function Email-1{
