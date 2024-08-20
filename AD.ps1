@@ -70,6 +70,8 @@ function Get-ADGroupsAndOUs {
 Get-ADGroupsAndOUs
 
 
+Get-Service Sense
+
 
 ## Dump GPOs
 function Get-AD-GPOs {
