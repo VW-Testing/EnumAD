@@ -5,7 +5,7 @@ mkdir -p ~/RFS
 cd ~/RFS
 
 sudo apt update -y
-sudo apt install -y netexec
+sudo apt install -y netexec nuclei
 git clone https://github.com/VW-Testing/Scanner.git
 git clone https://github.com/p0dalirius/Coercer.git
 git clone
