@@ -5,7 +5,8 @@ mkdir -p ~/RFS
 cd ~/RFS
 
 sudo apt update -y
-sudo apt install -y netexec nuclei
+sudo apt install -y netexec nuclei python3.11-venv
+pip install sectools
 git clone https://github.com/VW-Testing/Scanner.git
 git clone https://github.com/p0dalirius/Coercer.git
 git clone https://github.com/Yaxxine7/ASRepCatcher.git
