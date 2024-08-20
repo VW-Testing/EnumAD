@@ -3,4 +3,4 @@
 
 
 ## Install Base
-curl https://github.com/VW-Testing/Enumeratio/install.sh | bash
+curl https://raw.githubusercontent.com/VW-Testing/Enumeration/main/install.sh | bash
