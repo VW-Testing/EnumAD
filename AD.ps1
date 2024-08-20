@@ -1,5 +1,8 @@
 
-$domain = "client.com"
+$DOMAIN = "client.com"
+$OUPUT_FOLDER = "C:\Users\"
+
+
 $days = -60
 
 
@@ -13,11 +16,29 @@ $adPoints = @(
     @{Point = "AD.2"; Description = "Funções de auto-logon estão descativadas por GPO "},
     @{Point = "AD.3"; Description = "Mensagem de logon apresenta indicação da última tentativa de acesso "},
     @{Point = "AD.4"; Description = "Tempo máximo para login"}
+    @{Point = "AD.5"; Description = "Tempo máximo para login"}
 )
 
+function AD-1{
+Write-Host "Point: $($adPoints[0].Point), Description: $($adPoints[0].Description)"
 
+}
+function AD-2{
+Write-Host "Point: $($adPoints[1].Point), Description: $($adPoints[1].Description)"
+
+}
+function AD-3{
 Write-Host "Point: $($adPoints[2].Point), Description: $($adPoints[2].Description)"
 
+}
+function AD-4{
+Write-Host "Point: $($adPoints[3].Point), Description: $($adPoints[3].Description)"
+
+}
+function AD-5{
+Write-Host "Point: $($adPoints[4].Point), Description: $($adPoints[4].Description)"
+
+}
 
 function Get-PasswordNeverExpiresUsers {
     $users = Search-ADAccount -PasswordNeverExpires | Select-Object Name, ObjectClass
