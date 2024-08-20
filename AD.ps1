@@ -16,7 +16,22 @@ $adPoints = @(
     @{Point = "AD.2"; Description = "Funções de auto-logon estão descativadas por GPO "},
     @{Point = "AD.3"; Description = "Mensagem de logon apresenta indicação da última tentativa de acesso "},
     @{Point = "AD.4"; Description = "Tempo máximo para login"}
-    @{Point = "AD.5"; Description = "Tempo máximo para login"}
+    @{Point = "AD.5"; Description = "Separação das contas de administração"}
+    @{Point = "AD.6"; Description = "privilégios excessivos: Domain Admins"}
+    @{Point = "AD.7"; Description = "privilégios excessivos: Rotinas/procedimentos operacionais"}
+    @{Point = "AD.8"; Description = "privilégios excessivos: Utilizadores de sistemas"}
+    @{Point = "AD.9"; Description = "privilégios excessivos: Utilizadores guest"}
+    @{Point = "AD.10"; Description = "Parâmetros de validação de credencias"}
+    @{Point = "AD.11"; Description = "Passwords que não expiram"}
+    @{Point = "AD.12"; Description = "Complexidade passwords de Domínio"}
+    @{Point = "AD.13"; Description = "Politica de expiração passwords do domínio"}
+    @{Point = "AD.14"; Description = "Politica de histórico da Passwords do domínio"}
+    @{Point = "AD.17"; Description = "Registo de tentativas de autenticação"}
+    @{Point = "AD.18"; Description = "Monitorização de ações de administração de domínio"}
+    @{Point = "AD.19"; Description = "Funcionamento correto da Active Directory"}
+    @{Point = "AD.20"; Description = "Centralização da gestão de sistemas críticos"}
+    @{Point = "AD.21"; Description = "UserID de administração"}
+    @{Point = "AD.22"; Description = "UserID de administração"}
 )
 
 function AD-1{
