@@ -8,6 +8,6 @@ sudo apt update -y
 sudo apt install -y netexec nuclei
 git clone https://github.com/VW-Testing/Scanner.git
 git clone https://github.com/p0dalirius/Coercer.git
-git clone
-git clone
-git clone
+git clone https://github.com/Yaxxine7/ASRepCatcher.git
+git clone https://github.com/ly4k/Certipy.git
+git clone https://github.com/floesen/EventLogCrasher.git
