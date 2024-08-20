@@ -4,6 +4,129 @@ $days = -60
 
 
 
+Import-Module ActiveDirectory
+Import-Module GroupPolicy
+
+
+$adPoints = @(
+    @{Point = "AD.1"; Description = "Bloqueio da estação após um período de inatividade"},
+    @{Point = "AD.2"; Description = "Funções de auto-logon estão descativadas por GPO "},
+    @{Point = "AD.3"; Description = "Mensagem de logon apresenta indicação da última tentativa de acesso "},
+    @{Point = "AD.4"; Description = "Tempo máximo para login"}
+)
+
+
+Write-Host "Point: $($adPoints[2].Point), Description: $($adPoints[2].Description)"
+
+
+function Get-PasswordNeverExpiresUsers {
+    $users = Search-ADAccount -PasswordNeverExpires | Select-Object Name, ObjectClass
+    foreach ($user in $users) {
+        Write-Host "User: $($user.Name), ObjectClass: $($user.ObjectClass)"
+    }
+    get-aduser -filter * -properties Name, PasswordNeverExpires | where {$_.passwordNeverExpires -eq "true" } |  Select-Object DistinguishedName,Name,Enabled | Export-csv C:\Users\user_pw_never_expires.csv –NoTypeInformation
+}
+
+
+Get-PasswordNeverExpiresUsers
+
+
+function Get-ADUsers {
+    Get-ADUser -Filter * -Properties DisplayName, SamAccountName | Select-Object DisplayName, SamAccountName | Export-csv C:\Users\ad_users.csv –NoTypeInformation
+    
+}
+Out-File -FilePath C:\PATH\TO\FOLDER\OUTPUT.txt
+
+Get-ADUsers
+
+#Dump AD groups
+function Get-ADGroupsAndOUs {
+    Get-ADGroup -Filter * | Select-Object Name| Export-csv C:\Users\StevenM-adm\Desktop\vision-enum\ad_groups.csv –NoTypeInformation
+    Get-ADOrganizationalUnit -Filter * | Select-Object Name | Export-csv C:\Users\ad_ous.csv –NoTypeInformation
+}
+
+
+Get-ADGroupsAndOUs
+
+
+
+## Dump GPOs
+function Get-AD-GPOs {
+    Write-Host "Dumping GPOs"
+    Get-GPO -All | Export-csv C:\Users\ad_GPOs.csv –NoTypeInformation
+}
+Get-AD-GPOs
+
+
+function Get-PasswordHistoryPolicy {
+    $policy = Get-ADDefaultDomainPasswordPolicy
+    $policy.EnforceHistoryCount
+}
+
+# Example usage:
+Get-PasswordHistoryPolicy
+
+
+function Get-MaximumPasswordAge {
+    $policy = Get-ADDefaultDomainPasswordPolicy
+    $policy.MaxPasswordAge
+}
+
+# Example usage:
+Get-MaximumPasswordAge
+
+function Get-MinimumPasswordAge {
+    $policy = Get-ADDefaultDomainPasswordPolicy
+    $policy.MinPasswordAge
+}
+
+
+Get-MinimumPasswordAge
+
+
+#Password Complexity Requirements
+function Get-PasswordComplexityRequirements {
+    $policy = Get-ADDefaultDomainPasswordPolicy
+    
+    Write-Host "Password Complexity:" $policy.ComplexityEnabled
+}
+
+Get-PasswordComplexityRequirements
+
+#Account Lockout Policy
+function Get-AccountLockoutPolicy {
+    $policy = Get-ADDefaultDomainPasswordPolicy
+    
+    Write-Host "Number of policies:" $policy.LockoutThreshold
+}
+
+Get-AccountLockoutPolicy
+
+
+
+
+(get-date) - (gcim Win32_OperatingSystem).LastBootUpTime
+
+
+
+function TempoLogin{
+$path = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+
+# Obtém a propriedade de tempo máximo de logon
+$maxLogonTime = Get-ItemProperty -Path $path -Name 'MaxLogonTime'
+
+# Exibe o valor da propriedade
+if ($maxLogonTime.MaxLogonTime -ne $null) {
+    "O limite de tempo máximo permitido para logon é: $($maxLogonTime.MaxLogonTime) segundos"
+} else {
+    "Não há limite de tempo máximo definido para logon."
+}
+
+
+}
+
+TempoLogin
+
 
 
 $then = (Get-Date).AddDays($days)
