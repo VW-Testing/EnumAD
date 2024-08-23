@@ -12,3 +12,4 @@ git clone https://github.com/p0dalirius/Coercer.git
 git clone https://github.com/Yaxxine7/ASRepCatcher.git
 git clone https://github.com/ly4k/Certipy.git
 git clone https://github.com/floesen/EventLogCrasher.git
+git clone https://github.com/aapooksman/certmitm.git
