@@ -211,3 +211,19 @@ if ($defaultPolicy) {
 } else {
     Write-Host "No password policy found."
 }
+
+
+
+# Get all GPOs in the domain
+$gpos = Get-GPO -All
+
+# Loop through each GPO and generate an XML report
+foreach ($gpo in $gpos) {
+    $report = Get-GPOReport -Guid $gpo.Id -ReportType XML
+    # Load the XML report
+    [xml]$xmlReport = $report
+    # Search for the specific setting or keyword
+    if ($xmlReport.GPO.Policies.Policy | Select-String -Pattern "YourKeyword") {
+        Write-Output "Found in GPO: $($gpo.DisplayName)"
+    }
+}
